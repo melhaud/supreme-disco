@@ -1,0 +1,4 @@
+python3.11 -m venv ml_web_app
+source ml_web_app/bin/activate
+
+pytest -s # prints to stdout

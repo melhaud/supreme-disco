@@ -1,0 +1,9 @@
+pytest
+fastapi
+pydantic
+pathlib
+dataclasses
+pyyaml
+numpy
+pandas
+scikit-learn
