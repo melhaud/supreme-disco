@@ -2,7 +2,8 @@ import streamlit as st
 import requests
 
 # Define the FastAPI endpoint
-url = '/' # 'http://localhost:8000/' 'http://127.0.0.1:8000/' 'http://backend:8000/'
+url = "http://fastapi:8000/" # segmentation"
+# url = '/' # 'http://localhost:8000/' 'http://127.0.0.1:8000/' 'http://backend:8000/'
 
 # Make a GET request to the FastAPI app
 response = requests.get(url)
@@ -12,7 +13,9 @@ st.title("Arrhenius analysis")
 
 # displays a file uploader widget
 # TODO limit file extensions to CSV only
-data = st.file_uploader("Choose a *.CSV file with your data")
+data = st.file_uploader("Choose a *.CSV file with your data",
+                        type=['xlsx', 'csv'], 
+                        accept_multiple_files=True)
 
 # # displays a button
 # if st.button("Get E$_a$"):
