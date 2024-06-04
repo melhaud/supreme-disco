@@ -75,7 +75,7 @@ def get_model(data: DataFrame):
     
         return model
     else:
-        raise ValueError("Data seem not to contain necessary columns")
+        raise ValueError(f"Data seem not to contain necessary columns. Type: {type(data)}")
 
 
 def get_fit_params(data_path, model):
