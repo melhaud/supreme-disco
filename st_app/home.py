@@ -2,8 +2,8 @@ import streamlit as st
 import requests
 
 # Define the FastAPI endpoint
-url = "http://fastapi:8000/app/home"
-# url = '/' # 'http://localhost:8000/' 'http://127.0.0.1:8000/' 'http://backend:8000/'
+url = "/home"
+# url = '/' # "http://fastapi:8000/app" 'http://localhost:8000/' 'http://127.0.0.1:8000/' 'http://backend:8000/'
 
 # Make a GET request to the FastAPI app
 response = requests.get(url)
