@@ -49,7 +49,7 @@ if data:
     model = get_model(data)
 
 if model and data:
-    st.button(label="Run computation", on_click=get_fit_params, args=[data, model])
+    st.button(label="Run computation", on_click=get_fit_params, args=[data_txt, model])
 
 # # displays a button
 # if st.button("Get E$_a$"):
