@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from typing import Tuple
+from io import StringIO
 from pandas import DataFrame, read_csv
 from numpy import log, ndarray
 from sklearn.linear_model import LinearRegression
@@ -27,8 +28,9 @@ class ReactionOrderFitParams:
     coef : float
     intercept : float
 
-def get_data_from_json(data_json):
-    data = DataFrame.from_dict(data_json)
+def get_data_from_text(data_text):
+    data = read_csv(StringIO(data_text), sep=",")
+    # data = DataFrame.from_dict(data_text)
     if (config["x"] not in allowed_x) or (config["y"] not in allowed_y):
         raise ValueError("Please check the column names")
 

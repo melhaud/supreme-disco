@@ -6,7 +6,7 @@ from io import StringIO
 from ml.model import (get_data, 
                       get_model,
                       get_fit_params,
-                      get_data_from_json,
+                      get_data_from_text,
                       DATAPATH) # TODO add flexibility in choosing default or custom data
 
 from file_utils import (
@@ -44,8 +44,7 @@ if data_txt is not None:
     # To read file as string:
     string_data = stringio.read()
     st.code(string_data)
-    json_data = json.loads(string_data)
-    data = get_data_from_json(json_data)
+    data = get_data_from_text(string_data)
 
 if data:
     model = get_model(data)
