@@ -1,6 +1,7 @@
 from dataclasses import dataclass
+from typing import Tuple
 from pandas import DataFrame, read_csv
-from numpy import log
+from numpy import log, ndarray
 from sklearn.linear_model import LinearRegression
 
 import yaml
@@ -25,29 +26,29 @@ class ReactionOrderFitParams:
     r2 : float
     coef : float
     intercept : float
-    # label: str
-    # score: float
 
-def get_data(data_path: str = DATAPATH):
+def get_data(data_path: str = DATAPATH) -> Tuple[ndarray,ndarray]:
     data = read_csv(data_path, header=0)
     if (config["x"] not in allowed_x) or (config["y"] not in allowed_y):
         raise ValueError("Please check the column names")
 
     if config["x"] == "T":
         data["rec T K"] = -1000 / (data[config["x"]] + 273.15) / 8.314
-        return data["rec T K"], data[config["y"]]
+        return data["rec T K"].values.reshape(-1,1), \
+            data[config["y"]].values.reshape(-1,1),
     
     if config["y"] == "yield":
         data["log_yield"] = data[config["y"]].apply(log)
-        return data[config["x"]], data["log_yield"]
+        return data[config["x"]].values.reshape(-1,1),\
+            data["log_yield"].values.reshape(-1,1),
 
-    return data[config["x"]], data[config["y"]]
+    return data[config["x"]].values.reshape(-1,1), \
+            data[config["y"]].values.reshape(-1,1)
 
 def get_model():
 
     def model(data_path: str) -> ReactionOrderFitParams:
-        data = get_data(data_path)
-        x,y = data[0].values.reshape(-1, 1), data[1].values.reshape(-1, 1)
+        x,y = get_data(data_path)
 
         model = LinearRegression()
         model.fit(x,y)

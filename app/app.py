@@ -1,41 +1,53 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from ml.model import load_model
 
+from ml.model import ReactionOrderFitParams, get_model, get_data
 from pandas import DataFrame
 
 model = None
-app = FastAPI()
+app = FastAPI(
+    title="Arrhenius analysis",
+    description="""
+    Apparent activation energy computation from 
+    yield concentration and temperature data provided in *.CSV
+    """,
+    version="0.0.1"
+)
 
-class ReactionOrderFitParams(BaseModel):
-    """
-    Dataclass for apparent activation energy prediction.
-    """
-    r2 : float
-    coef : float
-    intercept : float
+# class ReactionOrderFitParams(BaseModel):
+#     """
+#     Dataclass for apparent activation energy prediction.
+#     """
+#     r2 : float
+#     coef : float
+#     intercept : float
 
 # app root
-@app.get("/")
+@app.post("/home")
 def index():
     return {"text": "Apparent activation energy prediction"}
 
 # app startup
 @app.on_event("startup")
 def startup_event():
-    global model
-    model = load_model()
+    global model # TODO change datafile path fixed in model.py
+    model = get_model()
 
 # coefficient of fit
 @app.get("/predict")
-def predict_sentiment(data: DataFrame):
-
-    model = model(data) 
+def get_params():
+    # TODO unfix datafile path
+    x,y = get_data()
+    model = model(x,y) 
 
     fit_params = ReactionOrderFitParams(
-        r2=model.score(data),
+        r2=model.score(x, y),
         coef=model.coef_,
         intercept=model.intercept_,
     )
 
-    return fit_params
+    return 
+
+# @app.post("/prediction")
+# def get_prediction():
+#     return 1
