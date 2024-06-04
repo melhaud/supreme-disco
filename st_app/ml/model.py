@@ -67,12 +67,11 @@ def get_data_from_text(data_text):
 
 def get_model(data: Tuple[DataFrame,DataFrame]):
     if isinstance(data, Tuple):
-        def model(data: Tuple[DataFrame,DataFrame]):
-            x,y = data
-            model = LinearRegression()
-            model.fit(x.values.reshape(-1,1),\
-                      y.values.reshape(-1,1))
-    
+        x,y = data
+        model = LinearRegression()
+        model.fit(x.values.reshape(-1,1),\
+                    y.values.reshape(-1,1))
+
         return model
     else:
         raise ValueError(f"Data seem not to contain necessary columns. Type: {type(data)}")
