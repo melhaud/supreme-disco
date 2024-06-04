@@ -66,7 +66,7 @@ def get_data(data_path: str = DATAPATH) -> Tuple[ndarray,ndarray]:
             data[config["y"]].values.reshape(-1,1)
 
 def get_model(data: Tuple[DataFrame,DataFrame]):
-    if isinstance(data, Tuple[DataFrame,DataFrame]):
+    if isinstance(data, Tuple):
         def model(data: Tuple[DataFrame,DataFrame]):
             x,y = data
             model = LinearRegression()
