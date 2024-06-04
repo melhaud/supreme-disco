@@ -3,8 +3,7 @@ import requests
 import json
 from io import StringIO
 
-from ml.model import (get_data, 
-                      get_model,
+from ml.model import (get_model,
                       get_fit_params,
                       get_data_from_text,
                       DATAPATH) # TODO add flexibility in choosing default or custom data
