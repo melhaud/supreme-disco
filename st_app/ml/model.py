@@ -77,7 +77,7 @@ def get_model(data: Tuple[DataFrame,DataFrame]):
     else:
         raise ValueError(f"Data seem not to contain necessary columns. Type: {type(data)}")
 
-def get_fit_params(data_text, model):
-    x,y = get_data_from_text(data_text)
+def get_fit_params(data, model):
+    x,y = data
     return model.score(x,y), float(model.coef_), model.intercept_
 

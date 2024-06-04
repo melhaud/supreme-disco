@@ -38,18 +38,17 @@ data_txt = st.file_uploader("Choose a *.CSV file with your data",
 #     st.write(e)
 
 # uploaded_data_path = None
-if data_txt is not None:
-    stringio = StringIO(data_txt.getvalue().decode("utf-8"))
-    # To read file as string:
-    string_data = stringio.read()
-    st.code(string_data)
-    data = get_data_from_text(string_data)
+stringio = StringIO(data_txt.getvalue().decode("utf-8"))
+# To read file as string:
+string_data = stringio.read()
+st.code(string_data)
+data = get_data_from_text(string_data)
 
-if data:
-    model = get_model(data)
+
+model = get_model(data)
 
 if model and data:
-    st.button(label="Run computation", on_click=get_fit_params, args=[data_txt, model])
+    st.button(label="Run computation", on_click=get_fit_params, args=[data, model])
 
 # # displays a button
 # if st.button("Get E$_a$"):
