@@ -32,11 +32,11 @@ data_txt = st.file_uploader("Choose a *.CSV file with your data",
                         type=['csv'], # 'xlsx',
                         accept_multiple_files=False)
 
-# Check extension of an uploaded file
-try:
-    upload_file_or_reject(data_txt, upload_folder)
-except InvalidFileExtension as e:
-    st.write(e)
+# # Check extension of an uploaded file
+# try:
+#     upload_file_or_reject(data_txt, upload_folder)
+# except InvalidFileExtension as e:
+#     st.write(e)
 
 # uploaded_data_path = None
 if data_txt is not None:
