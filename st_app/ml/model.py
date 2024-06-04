@@ -47,7 +47,7 @@ def get_data_from_text(data_text):
     return data[config["x"]].values.reshape(-1,1), \
             data[config["y"]].values.reshape(-1,1)
 
-def get_data(data_path: str = DATAPATH) -> Tuple[ndarray,ndarray]:
+# def get_data(data_path: str = DATAPATH) -> Tuple[ndarray,ndarray]:
     data = read_csv(data_path, header=0)
     if (config["x"] not in allowed_x) or (config["y"] not in allowed_y):
         raise ValueError("Please check the column names")
@@ -77,8 +77,7 @@ def get_model(data: Tuple[DataFrame,DataFrame]):
     else:
         raise ValueError(f"Data seem not to contain necessary columns. Type: {type(data)}")
 
-
-def get_fit_params(data_path, model):
-    x,y = get_data(data_path)
+def get_fit_params(data_text, model):
+    x,y = get_data_from_text(data_text)
     return model.score(x,y), float(model.coef_), model.intercept_
 
