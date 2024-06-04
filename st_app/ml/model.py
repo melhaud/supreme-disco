@@ -65,15 +65,18 @@ def get_data(data_path: str = DATAPATH) -> Tuple[ndarray,ndarray]:
     return data[config["x"]].values.reshape(-1,1), \
             data[config["y"]].values.reshape(-1,1)
 
-def get_model(data_path: str):
-
-    def model(data_path: str):
-        x,y = get_data(data_path)
-
-        model = LinearRegression()
-        model.fit(x,y)
+def get_model(data: DataFrame):
+    if isinstance(data, DataFrame):
+        def model(data: DataFrame):
+            x,y = data[config['x']].values.reshape(-1,1),\
+                  data[config['y']].values.reshape(-1,1)
+            model = LinearRegression()
+            model.fit(x,y)
     
-    return model
+        return model
+    else:
+        raise ValueError("Data seem not to contain necessary columns")
+
 
 def get_fit_params(data_path, model):
     x,y = get_data(data_path)
