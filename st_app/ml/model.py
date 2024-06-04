@@ -69,8 +69,8 @@ def get_model(data: Tuple[DataFrame,DataFrame]):
     if isinstance(data, Tuple):
         x,y = data
         model = LinearRegression()
-        model.fit(x.values.reshape(-1,1),\
-                    y.values.reshape(-1,1))
+        model.fit(x.reshape(-1,1),\
+                    y.reshape(-1,1))
 
         return model
     else:
