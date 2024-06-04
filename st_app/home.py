@@ -51,7 +51,6 @@ if data:
 if model and data:
     st.button(label="Run computation", on_click=get_fit_params, args=[data, model])
 
-
 # # displays a button
 # if st.button("Get E$_a$"):
 #     if data is not None:
