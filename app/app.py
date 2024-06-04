@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from ml.model import ReactionOrderFitParams, get_model, get_data
 from pandas import DataFrame
 
+
 model = None
 app = FastAPI(
     title="Arrhenius analysis",
@@ -13,6 +14,8 @@ app = FastAPI(
     """,
     version="0.0.1"
 )
+
+
 
 # class ReactionOrderFitParams(BaseModel):
 #     """
@@ -46,7 +49,7 @@ def get_params():
         intercept=model.intercept_,
     )
 
-    return 
+    return fit_params
 
 # @app.post("/prediction")
 # def get_prediction():

@@ -1,5 +1,20 @@
 import streamlit as st
 import requests
+import json
+from io import StringIO
+
+from ml.model import (get_data, 
+                      get_model,
+                      get_fit_params,
+                      get_data_from_json,
+                      DATAPATH) # TODO add flexibility in choosing default or custom data
+
+from file_utils import (
+    upload_file_or_reject,
+    InvalidFileExtension,
+    upload_folder,
+    output_folder,
+)
 
 # Define the FastAPI endpoint
 url = "https://supreme-disco.streamlit.app/home"
@@ -13,9 +28,30 @@ st.title("Arrhenius analysis")
 
 # displays a file uploader widget
 # TODO limit file extensions to CSV only
-data = st.file_uploader("Choose a *.CSV file with your data",
-                        type=['csv'], # 'xlsx', 
-                        accept_multiple_files=True)
+data_txt = st.file_uploader("Choose a *.CSV file with your data",
+                        type=['csv'], # 'xlsx',
+                        accept_multiple_files=False)
+
+# Check extension of an uploaded file
+try:
+    upload_file_or_reject(data_txt, upload_folder)
+except InvalidFileExtension as e:
+    st.write(e)
+
+# uploaded_data_path = None
+if data_txt is not None:
+    stringio = StringIO(data_txt.getvalue().decode("utf-8"))
+    # To read file as string:
+    string_data = stringio.read()
+    st.code(string_data)
+    json_data = json.loads(string_data)
+    data = get_data_from_json(json_data)
+
+model = get_model(data)
+
+if model and data:
+    st.button(label="Run computation", on_click=get_fit_params, args=[data, model])
+
 
 # # displays a button
 # if st.button("Get E$_a$"):
@@ -27,4 +63,4 @@ data = st.file_uploader("Choose a *.CSV file with your data",
 #     #     st.image(image, width=500)
 
 # Display the response in the Streamlit app
-st.write(response.json())
+# st.write(response.json())
