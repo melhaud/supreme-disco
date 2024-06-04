@@ -65,13 +65,13 @@ def get_data(data_path: str = DATAPATH) -> Tuple[ndarray,ndarray]:
     return data[config["x"]].values.reshape(-1,1), \
             data[config["y"]].values.reshape(-1,1)
 
-def get_model(data: DataFrame):
-    if isinstance(data, DataFrame):
-        def model(data: DataFrame):
-            x,y = data[config['x']].values.reshape(-1,1),\
-                  data[config['y']].values.reshape(-1,1)
+def get_model(data: Tuple[DataFrame,DataFrame]):
+    if isinstance(data, Tuple[DataFrame,DataFrame]):
+        def model(data: Tuple[DataFrame,DataFrame]):
+            x,y = data
             model = LinearRegression()
-            model.fit(x,y)
+            model.fit(x.values.reshape(-1,1),\
+                      y.values.reshape(-1,1))
     
         return model
     else:
