@@ -3,7 +3,7 @@ import requests
 import json
 from io import StringIO
 
-from ml.model import (get_data, 
+from ..ml.model import (get_data, 
                       get_model,
                       get_fit_params,
                       get_data_from_json,
@@ -46,8 +46,9 @@ if data_txt is not None:
     st.code(string_data)
     json_data = json.loads(string_data)
     data = get_data_from_json(json_data)
-
-model = get_model(data)
+    
+if data:
+    model = get_model(data)
 
 if model and data:
     st.button(label="Run computation", on_click=get_fit_params, args=[data, model])
