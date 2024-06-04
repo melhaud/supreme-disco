@@ -44,11 +44,11 @@ string_data = stringio.read()
 st.code(string_data)
 data = get_data_from_text(string_data)
 
-
 model = get_model(data)
 
 if model and data:
     st.button(label="Run computation", on_click=get_fit_params, args=[data, model])
+    st.write(get_fit_params(data, model))
 
 # # displays a button
 # if st.button("Get E$_a$"):
