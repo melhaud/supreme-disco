@@ -6,3 +6,4 @@ pyyaml
 numpy
 pandas
 scikit-learn
+streamlit
