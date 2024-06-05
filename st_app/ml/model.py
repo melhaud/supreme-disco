@@ -37,12 +37,12 @@ def get_data_from_text(data_text):
     if config["x"] == "T":
         data["rec T K"] = -1000 / (data[config["x"]] + 273.15) / 8.314
         return data["rec T K"].values.reshape(-1,1), \
-            data[config["y"]].values.reshape(-1,1),
+            data[config["y"]].values.reshape(-1,1)
     
     if config["y"] == "yield":
         data["log_yield"] = data[config["y"]].apply(log)
         return data[config["x"]].values.reshape(-1,1),\
-            data["log_yield"].values.reshape(-1,1),
+            data["log_yield"].values.reshape(-1,1)
 
     return data[config["x"]].values.reshape(-1,1), \
             data[config["y"]].values.reshape(-1,1)
