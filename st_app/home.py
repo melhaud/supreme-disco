@@ -47,7 +47,7 @@ if data_txt is not None:
     model = get_model(data)
 
     if model and data:
-        st.button(label="Run computation", on_click=get_fit_params, args=[data, model])
+        # st.button(label="Run computation", on_click=get_fit_params, args=[data, model])
         st.write(get_fit_params(data, model))
 
 # # displays a button
