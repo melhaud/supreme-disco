@@ -8,3 +8,6 @@ numpy
 pandas
 scikit-learn
 streamlit
+st-gsheets-connection
+shap
+# streamlit_gsheets
