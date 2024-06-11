@@ -75,6 +75,6 @@ def get_model(data: Tuple[DataFrame,DataFrame]):
 def get_fit_params(data, model):
     x,y = data
     return f"R2 score: {model.score(x,y):.3f}, \
-            activation energy: {float(model.coef_):.3f}, \
+            apparent activation energy: {float(model.coef_):.3f} kJ/mol, \
             preexponent: {float(model.intercept_):.3f}"
 
